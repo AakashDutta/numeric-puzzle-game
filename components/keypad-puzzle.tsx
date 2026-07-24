@@ -13,6 +13,11 @@ const CORRECT_BG = '#e4f0fc'
 
 const START_SECONDS = 10 * 60 // 10 minutes
 
+// A fixed, solvable 3x3 board used for the very first server + client paint.
+// Rendering the same board on both sides avoids a hydration mismatch; the
+// board is then re-scrambled on the client after mount for a random game.
+const INITIAL_3x3: number[] = [0, 1, 3, 4, 2, 5, 7, 8, 6]
+
 // Text style shared by the funky labels
 const funkyText: React.CSSProperties = {
   fontFamily: 'var(--font-fredoka), sans-serif',
@@ -78,7 +83,7 @@ function scramble(size: number): number[] {
 
 export default function KeypadPuzzle() {
   const [size, setSize] = useState(3)
-  const [tiles, setTiles] = useState<number[]>(() => scramble(3))
+  const [tiles, setTiles] = useState<number[]>(INITIAL_3x3)
   const [moves, setMoves] = useState(0)
   const [seconds, setSeconds] = useState(START_SECONDS)
   const [pressed, setPressed] = useState<number | null>(null)
@@ -92,6 +97,11 @@ export default function KeypadPuzzle() {
 
   const level = size - 2 // 3x3 = level 1, 4x4 = level 2, ...
   const solved = makeSolved(size)
+
+  // Scramble once on the client after mount (keeps SSR/CSR markup identical).
+  useEffect(() => {
+    setTiles(scramble(3))
+  }, [])
 
   // Countdown timer — runs while the round is active, pauses on win.
   useEffect(() => {
