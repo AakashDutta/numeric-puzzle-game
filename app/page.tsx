@@ -7,10 +7,10 @@ export default function Page() {
         minHeight: '100vh',
         width: '100%',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         background: '#ffffff',
-        padding: 24,
+        padding: 32,
       }}
     >
       <KeypadPuzzle />
