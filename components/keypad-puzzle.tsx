@@ -139,15 +139,25 @@ export default function KeypadPuzzle() {
   return (
     <div
       style={{
+        position: 'relative',
+        width: '100%',
         display: 'flex',
         alignItems: 'flex-start',
         justifyContent: 'center',
-        gap: 32,
-        flexWrap: 'wrap',
       }}
     >
-      {/* ===== Left column: logo + newspaper panel ===== */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: 320 }}>
+      {/* ===== Left column: logo + newspaper panel (pinned to far-left corner) ===== */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
+          width: 300,
+        }}
+      >
         {/* Logo box */}
         <div
           style={{

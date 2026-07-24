@@ -10,7 +10,7 @@ export default function Page() {
         alignItems: 'flex-start',
         justifyContent: 'center',
         background: '#ffffff',
-        padding: 32,
+        padding: '120px 24px 48px',
       }}
     >
       <KeypadPuzzle />
